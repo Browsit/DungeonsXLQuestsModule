@@ -3,7 +3,7 @@ Adds DungeonsXL objectives to Quests. This work depends on contributions from co
 
 ## Download
 
-Distributed exclusively through Spigot: https://www.spigotmc.org/
+Distributed exclusively through Spigot: https://www.spigotmc.org/resources/dungeonsxl-quests-module.66703/
 
 ## Usage
 
