@@ -50,5 +50,5 @@ public class DungeonsXLFinishObjective extends CustomObjective implements Listen
 				return;
 			}
 		}
-	}	
+	}
 }

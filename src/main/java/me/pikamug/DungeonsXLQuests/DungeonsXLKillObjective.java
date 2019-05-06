@@ -40,7 +40,7 @@ public class DungeonsXLKillObjective extends CustomObjective implements Listener
 			return;
 		}
 		Entity entity = event.getBukkitEvent().getEntity();
-		if (registry.isNPC(entity)) {
+		if (registry != null && registry.isNPC(entity)) {
 			return;
 		}
 		String mobName = event.getDMob().getEntity().getName();
@@ -60,5 +60,5 @@ public class DungeonsXLKillObjective extends CustomObjective implements Listener
 				}
 			}
 		}
-	}	
+	}
 }
