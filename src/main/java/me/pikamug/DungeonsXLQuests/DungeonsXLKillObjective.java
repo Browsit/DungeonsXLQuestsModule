@@ -39,11 +39,11 @@ public class DungeonsXLKillObjective extends CustomObjective implements Listener
 		if (quester == null) {
 			return;
 		}
-		Entity entity = event.getBukkitEvent().getEntity();
-		if (registry != null && registry.isNPC(entity)) {
+		Entity entity = event.getDMob().getEntity();
+		if (registry != null && entity != null && registry.isNPC(entity)) {
 			return;
 		}
-		String mobName = event.getDMob().getEntity().getName();
+		String mobName = entity.getName();
 		for (Quest q : quester.getCurrentQuests().keySet()) {
 			Map<String, Object> datamap = getDataForPlayer(killer, this, q);
 			if (datamap != null) {
