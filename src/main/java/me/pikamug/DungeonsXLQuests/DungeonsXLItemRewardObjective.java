@@ -8,10 +8,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
+import de.erethon.dungeonsxl.api.Reward;
 import de.erethon.dungeonsxl.event.dplayer.instance.game.DGamePlayerRewardEvent;
 import de.erethon.dungeonsxl.reward.ItemReward;
-import de.erethon.dungeonsxl.reward.Reward;
-import de.erethon.dungeonsxl.reward.RewardTypeDefault;
 import me.blackvein.quests.CustomObjective;
 import me.blackvein.quests.Quest;
 import me.blackvein.quests.Quester;
@@ -39,7 +38,7 @@ public class DungeonsXLItemRewardObjective extends CustomObjective implements Li
 		}
 		ArrayList<String> dungeonRewardNames = new ArrayList<String>();
 		for (Reward r : event.getRewards()) {
-			if (r.getType() == RewardTypeDefault.ITEM) {
+			if (r instanceof ItemReward) {
 				ItemReward ir = (ItemReward) r;
 				for (ItemStack is : ir.getItems()) {
 					if (is != null) {

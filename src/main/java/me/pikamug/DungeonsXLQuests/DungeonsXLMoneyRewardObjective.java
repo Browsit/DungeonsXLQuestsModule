@@ -7,10 +7,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
+import de.erethon.dungeonsxl.api.Reward;
 import de.erethon.dungeonsxl.event.dplayer.instance.game.DGamePlayerRewardEvent;
 import de.erethon.dungeonsxl.reward.MoneyReward;
-import de.erethon.dungeonsxl.reward.Reward;
-import de.erethon.dungeonsxl.reward.RewardTypeDefault;
 import me.blackvein.quests.CustomObjective;
 import me.blackvein.quests.Quest;
 import me.blackvein.quests.Quester;
@@ -38,7 +37,7 @@ public class DungeonsXLMoneyRewardObjective extends CustomObjective implements L
 		}
 		ArrayList<Double> dungeonRewardNames = new ArrayList<Double>();
 		for (Reward r : event.getRewards()) {
-			if (r.getType() == RewardTypeDefault.MONEY) {
+			if (r instanceof MoneyReward) {
 				MoneyReward ir = (MoneyReward) r;
 				dungeonRewardNames.add(ir.getMoney());
 			}
