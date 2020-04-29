@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import de.erethon.dungeonsxl.event.dmob.DMobDeathEvent;
+import de.erethon.dungeonsxl.api.event.mob.DungeonMobDeathEvent;
 import de.erethon.dungeonsxl.mob.DNPCRegistry;
 import me.blackvein.quests.CustomObjective;
 import me.blackvein.quests.Quest;
@@ -18,7 +18,7 @@ import me.blackvein.quests.Quests;
 public class DungeonsXLKillObjective extends CustomObjective implements Listener {
 	private static Quests quests = (Quests) Bukkit.getServer().getPluginManager().getPlugin("Quests");
 	private static DNPCRegistry registry;
-	
+
 	public DungeonsXLKillObjective() {
 		setName("DXL Kill Mobs Objective");
 		setAuthor("PikaMug");
@@ -28,10 +28,10 @@ public class DungeonsXLKillObjective extends CustomObjective implements Listener
 		setCountPrompt("Set the amount of dungeon mobs to kill");
 		setDisplay("%Kill Obj% %Kill Names%: %count%");
 	}
-	
+
 	@EventHandler
-	public void onDMobDeath(DMobDeathEvent event) {
-		Player killer = event.getDMob().getEntity().getKiller();
+	public void onDMobDeath(DungeonMobDeathEvent event) {
+		Player killer = event.getDungeonMob().getEntity().getKiller();
 		if (killer == null) {
 			return;
 		}
@@ -39,7 +39,7 @@ public class DungeonsXLKillObjective extends CustomObjective implements Listener
 		if (quester == null) {
 			return;
 		}
-		Entity entity = event.getDMob().getEntity();
+		Entity entity = event.getDungeonMob().getEntity();
 		if (registry != null && entity != null && registry.isNPC(entity)) {
 			return;
 		}
