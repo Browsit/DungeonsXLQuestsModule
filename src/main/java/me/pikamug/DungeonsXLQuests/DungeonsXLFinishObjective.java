@@ -6,7 +6,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import de.erethon.dungeonsxl.event.dplayer.instance.game.DGamePlayerFinishEvent;
+import de.erethon.dungeonsxl.api.event.player.GamePlayerFinishEvent;
+import de.erethon.dungeonsxl.player.DGamePlayer;
 import me.blackvein.quests.CustomObjective;
 import me.blackvein.quests.Quest;
 import me.blackvein.quests.Quester;
@@ -14,7 +15,7 @@ import me.blackvein.quests.Quests;
 
 public class DungeonsXLFinishObjective extends CustomObjective implements Listener {
 	private static Quests quests = (Quests) Bukkit.getServer().getPluginManager().getPlugin("Quests");
-	
+
 	public DungeonsXLFinishObjective() {
 		setName("DXL Finish Objective");
 		setAuthor("PikaMug");
@@ -24,15 +25,15 @@ public class DungeonsXLFinishObjective extends CustomObjective implements Listen
 		setCountPrompt("Set the amount of floors to finish");
 		setDisplay("%Finish Obj% %Dungeon Names%: %count%");
 	}
-	
+
 	@EventHandler
-	public void onDGamePlayerFinish(DGamePlayerFinishEvent event) {
-		Player finisher = event.getDPlayer().getPlayer();
+	public void onDGamePlayerFinish(GamePlayerFinishEvent event) {
+		Player finisher = event.getBukkitPlayer().getPlayer();
 		Quester quester = quests.getQuester(finisher.getUniqueId());
 		if (quester == null) {
 			return;
 		}
-		String dungeonName = event.getDPlayer().getGroup().getDungeonName();
+		String dungeonName = ((DGamePlayer) event.getBukkitPlayer()).getGroup().getDungeonName();
 		for (Quest q : quester.getCurrentQuests().keySet()) {
 			Map<String, Object> datamap = getDataForPlayer(finisher, this, q);
 			if (datamap != null) {
