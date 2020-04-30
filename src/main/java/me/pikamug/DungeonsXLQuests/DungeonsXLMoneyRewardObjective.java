@@ -8,7 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import de.erethon.dungeonsxl.api.Reward;
-import de.erethon.dungeonsxl.event.dplayer.instance.game.DGamePlayerRewardEvent;
+import de.erethon.dungeonsxl.api.event.player.GlobalPlayerRewardPayOutEvent;
 import de.erethon.dungeonsxl.reward.MoneyReward;
 import me.blackvein.quests.CustomObjective;
 import me.blackvein.quests.Quest;
@@ -17,7 +17,7 @@ import me.blackvein.quests.Quests;
 
 public class DungeonsXLMoneyRewardObjective extends CustomObjective implements Listener {
 	private static Quests quests = (Quests) Bukkit.getServer().getPluginManager().getPlugin("Quests");
-	
+
 	public DungeonsXLMoneyRewardObjective() {
 		setName("DXL Money Reward Objective");
 		setAuthor("PikaMug");
@@ -27,10 +27,10 @@ public class DungeonsXLMoneyRewardObjective extends CustomObjective implements L
 		setCountPrompt("Set the quantity of money rewards to get");
 		setDisplay("%Money Obj% %Money Amounts%: %count%");
 	}
-	
+
 	@EventHandler
-	public void onDGamePlayerFinish(DGamePlayerRewardEvent event) {
-		Player recipient = event.getDPlayer().getPlayer();
+	public void onDGamePlayerFinish(GlobalPlayerRewardPayOutEvent event) {
+		Player recipient = event.getBukkitPlayer().getPlayer();
 		Quester quester = quests.getQuester(recipient.getUniqueId());
 		if (quester == null) {
 			return;
@@ -58,5 +58,5 @@ public class DungeonsXLMoneyRewardObjective extends CustomObjective implements L
 				return;
 			}
 		}
-	}	
+	}
 }
