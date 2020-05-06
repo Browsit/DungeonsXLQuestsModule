@@ -22,7 +22,7 @@ public class DungeonXLPlayerKillObjective extends CustomObjective implements Lis
         addStringPrompt("Objective name", "Set a name for the objective", "Kill players in dungeon");
         addStringPrompt("Dungeon names", "Set a name of dungeons where players should be killed, separated by comma", "ANY");
         setCountPrompt("Set the amount of players to kill");
-        setDisplay("%Objective name% v %Dungeon names%: %count%");
+        setDisplay("%Objective name% in %Dungeon names%: %count%");
     }
 
     @EventHandler
@@ -41,15 +41,15 @@ public class DungeonXLPlayerKillObjective extends CustomObjective implements Lis
         String dungeonName = e.getGamePlayer().getGameWorld().getDungeon().getName();
         for (Quest q : quester.getCurrentQuests().keySet()) {
             Map<String, Object> datamap = getDataForPlayer(killer, this, q);
-            String dungs = (String)datamap.getOrDefault("Dungeon Names", "ANY");
+            String dungs = (String)datamap.getOrDefault("Dungeon names", "ANY");
             if(dungs == null) {
-                return;
+                continue;
             }
             String[] split = dungs.split(",");
             for (String str : split) {
                 if(str.equals("ANY") || str.equalsIgnoreCase(dungeonName)) {
                     incrementObjective(killer, this, 1, q);
-                    return;
+                    break;
                 }
             }
         }
