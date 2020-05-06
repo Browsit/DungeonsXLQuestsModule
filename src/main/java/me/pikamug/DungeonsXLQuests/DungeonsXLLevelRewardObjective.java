@@ -2,12 +2,13 @@ package me.pikamug.DungeonsXLQuests;
 
 import java.util.ArrayList;
 import java.util.Map;
+
+import de.erethon.dungeonsxl.reward.Reward;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import de.erethon.dungeonsxl.api.Reward;
 import de.erethon.dungeonsxl.event.dplayer.instance.game.DGamePlayerRewardEvent;
 import de.erethon.dungeonsxl.reward.LevelReward;
 import me.blackvein.quests.CustomObjective;
