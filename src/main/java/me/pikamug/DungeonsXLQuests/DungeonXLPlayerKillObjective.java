@@ -1,7 +1,6 @@
 package me.pikamug.DungeonsXLQuests;
 
-import de.erethon.dungeonsxl.event.dplayer.instance.game.DGamePlayerDeathEvent;
-import de.erethon.dungeonsxl.mob.DNPCRegistry;
+import de.erethon.dungeonsxl.api.event.player.GamePlayerDeathEvent;
 import me.blackvein.quests.CustomObjective;
 import me.blackvein.quests.Quest;
 import me.blackvein.quests.Quester;
@@ -27,8 +26,9 @@ public class DungeonXLPlayerKillObjective extends CustomObjective implements Lis
     }
 
     @EventHandler
-    public void OnPlayerDeath(DGamePlayerDeathEvent e) {
-        Player killer = e.getDPlayer().getPlayer().getKiller();
+    public void OnPlayerDeath(GamePlayerDeathEvent e) {
+
+        Player killer = e.getGamePlayer().getPlayer().getKiller();
         if(killer == null) {
             return;
         }
@@ -38,7 +38,7 @@ public class DungeonXLPlayerKillObjective extends CustomObjective implements Lis
             return;
         }
 
-        String dungeonName = e.getDPlayer().getDGroup().getDungeonName();
+        String dungeonName = e.getGamePlayer().getGameWorld().getDungeon().getName();
         for (Quest q : quester.getCurrentQuests().keySet()) {
             Map<String, Object> datamap = getDataForPlayer(killer, this, q);
             String dungs = (String)datamap.getOrDefault("Dungeon Names", "ANY");
