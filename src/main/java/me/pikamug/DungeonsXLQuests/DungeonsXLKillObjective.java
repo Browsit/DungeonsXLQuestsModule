@@ -23,7 +23,7 @@ public class DungeonsXLKillObjective extends CustomObjective implements Listener
 		setName("DXL Kill Mobs Objective");
 		setAuthor("PikaMug");
 		setShowCount(true);
-		addStringPrompt("Kill Obj", "Set a name for the objective", "Kill players in a dungeon");
+		addStringPrompt("Kill Obj", "Set a name for the objective", "Kill dungeon mob");
 		addStringPrompt("Kill Names", "Enter dungeon mob names, separating each one by a comma", "ANY");
 		setCountPrompt("Set the amount of dungeon mobs to kill");
 		setDisplay("%Kill Obj% %Kill Names%: %count%");
