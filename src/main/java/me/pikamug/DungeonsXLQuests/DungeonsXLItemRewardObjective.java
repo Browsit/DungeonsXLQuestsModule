@@ -2,15 +2,14 @@ package me.pikamug.DungeonsXLQuests;
 
 import java.util.ArrayList;
 import java.util.Map;
-
-import de.erethon.dungeonsxl.reward.Reward;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
-import de.erethon.dungeonsxl.event.dplayer.instance.game.DGamePlayerRewardEvent;
+import de.erethon.dungeonsxl.api.Reward;
+import de.erethon.dungeonsxl.api.event.player.GlobalPlayerRewardPayOutEvent;
 import de.erethon.dungeonsxl.reward.ItemReward;
 import me.blackvein.quests.CustomObjective;
 import me.blackvein.quests.Quest;
@@ -19,7 +18,7 @@ import me.blackvein.quests.Quests;
 
 public class DungeonsXLItemRewardObjective extends CustomObjective implements Listener {
 	private static Quests quests = (Quests) Bukkit.getServer().getPluginManager().getPlugin("Quests");
-	
+
 	public DungeonsXLItemRewardObjective() {
 		setName("DXL Item Reward Objective");
 		setAuthor("PikaMug");
@@ -29,10 +28,10 @@ public class DungeonsXLItemRewardObjective extends CustomObjective implements Li
 		setCountPrompt("Set the quantity of item rewards to get");
 		setDisplay("%Item Obj% %Item Names%: %count%");
 	}
-	
+
 	@EventHandler
-	public void onDGamePlayerFinish(DGamePlayerRewardEvent event) {
-		Player recipient = event.getDPlayer().getPlayer();
+	public void onDGamePlayerFinish(GlobalPlayerRewardPayOutEvent event) {
+		Player recipient = event.getBukkitPlayer().getPlayer();
 		Quester quester = quests.getQuester(recipient.getUniqueId());
 		if (quester == null) {
 			return;
@@ -68,5 +67,5 @@ public class DungeonsXLItemRewardObjective extends CustomObjective implements Li
 				return;
 			}
 		}
-	}	
+	}
 }
