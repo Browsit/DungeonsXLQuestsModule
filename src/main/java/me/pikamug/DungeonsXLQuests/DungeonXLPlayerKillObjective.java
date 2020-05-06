@@ -47,7 +47,7 @@ public class DungeonXLPlayerKillObjective extends CustomObjective implements Lis
             }
             String[] split = dungs.split(",");
             for (String str : split) {
-                if(str.equals("ANY") || str.equalsIgnoreCase(dungeonName)) {
+                if(str.equals("ANY") || str.trim().equalsIgnoreCase(dungeonName)) {
                     incrementObjective(killer, this, 1, q);
                     break;
                 }
