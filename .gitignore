@@ -19,9 +19,10 @@ nbdist/
 
 # Maven files
 /target
-
+/pom.xml
 # Java files
 *.class
 *.log
 *.ctxt
 hs_err_pid*
+
