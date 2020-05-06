@@ -19,7 +19,6 @@ nbdist/
 
 # Maven files
 /target
-/pom.xml
 # Java files
 *.class
 *.log
