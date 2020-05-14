@@ -12,10 +12,10 @@ import org.bukkit.event.Listener;
 
 import java.util.Map;
 
-public class DungeonXLPlayerKillObjective extends CustomObjective implements Listener {
+public class DungeonXLKillPlayersObjective extends CustomObjective implements Listener {
     private static Quests quests = (Quests) Bukkit.getServer().getPluginManager().getPlugin("Quests");
 
-    public DungeonXLPlayerKillObjective() {
+    public DungeonXLKillPlayersObjective() {
         setName("DXL Kill Players Objective");
         setAuthor("DSroD");
         setShowCount(true);

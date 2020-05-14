@@ -15,11 +15,11 @@ import me.blackvein.quests.Quest;
 import me.blackvein.quests.Quester;
 import me.blackvein.quests.Quests;
 
-public class DungeonsXLKillObjective extends CustomObjective implements Listener {
+public class DungeonsXLKillMobsObjective extends CustomObjective implements Listener {
 	private static Quests quests = (Quests) Bukkit.getServer().getPluginManager().getPlugin("Quests");
 	private static DNPCRegistry registry;
 
-	public DungeonsXLKillObjective() {
+	public DungeonsXLKillMobsObjective() {
 		setName("DXL Kill Mobs Objective");
 		setAuthor("PikaMug");
 		setShowCount(true);
