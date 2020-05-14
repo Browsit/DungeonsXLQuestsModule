@@ -7,7 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import de.erethon.dungeonsxl.api.event.player.GamePlayerFinishEvent;
-import de.erethon.dungeonsxl.player.DGamePlayer;
 import me.blackvein.quests.CustomObjective;
 import me.blackvein.quests.Quest;
 import me.blackvein.quests.Quester;
