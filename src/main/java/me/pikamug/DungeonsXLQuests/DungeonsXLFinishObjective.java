@@ -33,7 +33,7 @@ public class DungeonsXLFinishObjective extends CustomObjective implements Listen
 		if (quester == null) {
 			return;
 		}
-		String dungeonName = ((DGamePlayer) event.getBukkitPlayer()).getGroup().getDungeonName();
+		String dungeonName = event.getGamePlayer().getGroup().getDungeon().getName();
 		for (Quest q : quester.getCurrentQuests().keySet()) {
 			Map<String, Object> datamap = getDataForPlayer(finisher, this, q);
 			if (datamap != null) {
