@@ -2,7 +2,7 @@ name: DungeonsXLQuests
 version: 1.5
 description: Quests module for DungeonsXL
 author: PikaMug
-website: https://www.spigotmc.org/resources/dungeonsxl-quests-module.66703/
+website: https://github.com/PikaMug/DungeonsXLQuestsModule
 
-main: me.pikamug.DungeonsXLQuests
+main: me.pikamug.dungeonsxlquests
 depend: [DungeonsXL, Quests]
