@@ -54,7 +54,7 @@ public class DungeonsXLKillPlayersObjective extends CustomObjective implements L
                 }
                 final String[] split = dungeonNames.split(",");
                 for (final String str : split) {
-                    if(str.equals("ANY") || str.trim().equalsIgnoreCase(dungeonName)) {
+                    if (str.equals("ANY") || str.trim().equalsIgnoreCase(dungeonName)) {
                         incrementObjective(killer, this, 1, q);
                         break;
                     }
