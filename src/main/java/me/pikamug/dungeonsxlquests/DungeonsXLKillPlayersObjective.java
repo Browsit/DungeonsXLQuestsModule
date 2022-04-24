@@ -25,7 +25,7 @@ import java.util.Map;
 public class DungeonsXLKillPlayersObjective extends CustomObjective implements Listener {
 
     public DungeonsXLKillPlayersObjective() {
-        setName("DXL Kill Players Objective");
+        setName("DungeonsXL Kill Players Objective");
         setAuthor("DSroD");
         setShowCount(true);
         addStringPrompt("DXL Player Obj", "Set a name for the objective", "Kill players in dungeon");

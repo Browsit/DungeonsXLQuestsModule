@@ -25,7 +25,7 @@ import java.util.Map;
 public class DungeonsXLFinishObjective extends CustomObjective implements Listener {
 
 	public DungeonsXLFinishObjective() {
-		setName("DXL Finish Objective");
+		setName("DungeonsXL Finish Objective");
 		setAuthor("PikaMug");
 		setShowCount(true);
 		addStringPrompt("DXL Finish Obj", "Set a name for the objective", "Finish dungeon");

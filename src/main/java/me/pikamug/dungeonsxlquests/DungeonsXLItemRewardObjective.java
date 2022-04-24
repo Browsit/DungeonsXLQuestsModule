@@ -29,7 +29,7 @@ import java.util.Map;
 public class DungeonsXLItemRewardObjective extends CustomObjective implements Listener {
 
 	public DungeonsXLItemRewardObjective() {
-		setName("DXL Item Reward Objective");
+		setName("DungeonsXL Item Reward Objective");
 		setAuthor("PikaMug");
 		setShowCount(true);
 		addStringPrompt("DXL Item Obj", "Set a name for the objective", "Get reward item");

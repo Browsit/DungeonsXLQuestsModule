@@ -28,7 +28,7 @@ import java.util.Map;
 public class DungeonsXLMoneyRewardObjective extends CustomObjective implements Listener {
 
 	public DungeonsXLMoneyRewardObjective() {
-		setName("DXL Money Reward Objective");
+		setName("DungeonsXL Money Reward Objective");
 		setAuthor("PikaMug");
 		setShowCount(true);
 		addStringPrompt("DXL Money Obj", "Set a name for the objective", "Get reward money");

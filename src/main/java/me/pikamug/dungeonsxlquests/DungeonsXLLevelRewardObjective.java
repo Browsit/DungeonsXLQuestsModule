@@ -28,7 +28,7 @@ import java.util.Map;
 public class DungeonsXLLevelRewardObjective extends CustomObjective implements Listener {
 
 	public DungeonsXLLevelRewardObjective() {
-		setName("DXL Level Reward Objective");
+		setName("DungeonsXL Level Reward Objective");
 		setAuthor("PikaMug");
 		setShowCount(true);
 		addStringPrompt("DXL Level Obj", "Set a name for the objective", "Get reward level");
