@@ -45,7 +45,7 @@ public class DungeonsXLKillPlayersObjective extends CustomObjective implements L
             return;
         }
         final String dungeonName = e.getGamePlayer().getGameWorld().getDungeon().getName();
-        for (Quest q : quester.getCurrentQuests().keySet()) {
+        for (final Quest q : quester.getCurrentQuests().keySet()) {
             final Map<String, Object> datamap = getDataForPlayer(killer, this, q);
             if (datamap != null) {
                 final String dungeonNames = (String)datamap.getOrDefault("DXL Player Dungeon", "ANY");
