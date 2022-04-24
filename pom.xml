@@ -44,6 +44,7 @@
             <groupId>me.blackvein.quests</groupId>
             <artifactId>quests-core</artifactId>
             <version>4.4.0</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.github.PikaMug</groupId>
