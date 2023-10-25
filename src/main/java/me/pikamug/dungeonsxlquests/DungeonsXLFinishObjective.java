@@ -13,16 +13,16 @@
 package me.pikamug.dungeonsxlquests;
 
 import de.erethon.dungeonsxl.api.event.player.GamePlayerFinishEvent;
-import me.blackvein.quests.CustomObjective;
-import me.blackvein.quests.Quest;
-import me.blackvein.quests.Quester;
+import me.pikamug.quests.module.BukkitCustomObjective;
+import me.pikamug.quests.player.Quester;
+import me.pikamug.quests.quests.Quest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import java.util.Map;
 
-public class DungeonsXLFinishObjective extends CustomObjective implements Listener {
+public class DungeonsXLFinishObjective extends BukkitCustomObjective implements Listener {
 
 	public DungeonsXLFinishObjective() {
 		setName("DungeonsXL Finish Objective");
@@ -43,7 +43,7 @@ public class DungeonsXLFinishObjective extends CustomObjective implements Listen
 		}
 		final String dungeonName = event.getGamePlayer().getGroup().getDungeon().getName();
 		for (final Quest q : quester.getCurrentQuests().keySet()) {
-			final Map<String, Object> datamap = getDataForPlayer(finisher, this, q);
+			final Map<String, Object> datamap = getDataForPlayer(finisher.getUniqueId(), this, q);
 			if (datamap != null) {
 				final String dungeonNames = (String)datamap.getOrDefault("DXL Finish Dungeon", "ANY");
 				if (dungeonNames == null) {
@@ -52,7 +52,7 @@ public class DungeonsXLFinishObjective extends CustomObjective implements Listen
 				final String[] spl = dungeonNames.split(",");
 				for (final String str : spl) {
 					if (str.equals("ANY") || dungeonName.equalsIgnoreCase(str)) {
-						incrementObjective(finisher, this, 1, q);
+						incrementObjective(finisher.getUniqueId(), this, q, 1);
 						return;
 					}
 				}

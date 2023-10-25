@@ -15,9 +15,9 @@ package me.pikamug.dungeonsxlquests;
 import de.erethon.dungeonsxl.api.Reward;
 import de.erethon.dungeonsxl.api.event.player.GlobalPlayerRewardPayOutEvent;
 import de.erethon.dungeonsxl.reward.MoneyReward;
-import me.blackvein.quests.CustomObjective;
-import me.blackvein.quests.Quest;
-import me.blackvein.quests.Quester;
+import me.pikamug.quests.module.BukkitCustomObjective;
+import me.pikamug.quests.player.Quester;
+import me.pikamug.quests.quests.Quest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -25,7 +25,7 @@ import org.bukkit.event.Listener;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class DungeonsXLMoneyRewardObjective extends CustomObjective implements Listener {
+public class DungeonsXLMoneyRewardObjective extends BukkitCustomObjective implements Listener {
 
 	public DungeonsXLMoneyRewardObjective() {
 		setName("DungeonsXL Money Reward Objective");
@@ -52,7 +52,7 @@ public class DungeonsXLMoneyRewardObjective extends CustomObjective implements L
 			}
 		}
 		for (final Quest q : quester.getCurrentQuests().keySet()) {
-			final Map<String, Object> datamap = getDataForPlayer(recipient, this, q);
+			final Map<String, Object> datamap = getDataForPlayer(recipient.getUniqueId(), this, q);
 			if (datamap != null) {
 				final String rewardNames = (String)datamap.getOrDefault("DXL Money Amount", "ANY");
 				if (rewardNames == null) {
@@ -62,7 +62,7 @@ public class DungeonsXLMoneyRewardObjective extends CustomObjective implements L
 				for (final String str : spl) {
 					if (str != null) {
 						if (str.equals("ANY") || dungeonRewardNames.contains(Double.valueOf(str))) {
-							incrementObjective(recipient, this, 1, q);
+							incrementObjective(recipient.getUniqueId(), this, q, 1);
 							return;
 						}
 					}

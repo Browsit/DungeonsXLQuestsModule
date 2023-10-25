@@ -15,9 +15,9 @@ package me.pikamug.dungeonsxlquests;
 import de.erethon.dungeonsxl.api.Reward;
 import de.erethon.dungeonsxl.api.event.player.GlobalPlayerRewardPayOutEvent;
 import de.erethon.dungeonsxl.reward.ItemReward;
-import me.blackvein.quests.CustomObjective;
-import me.blackvein.quests.Quest;
-import me.blackvein.quests.Quester;
+import me.pikamug.quests.module.BukkitCustomObjective;
+import me.pikamug.quests.player.Quester;
+import me.pikamug.quests.quests.Quest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -26,7 +26,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class DungeonsXLItemRewardObjective extends CustomObjective implements Listener {
+public class DungeonsXLItemRewardObjective extends BukkitCustomObjective implements Listener {
 
 	public DungeonsXLItemRewardObjective() {
 		setName("DungeonsXL Item Reward Objective");
@@ -60,15 +60,15 @@ public class DungeonsXLItemRewardObjective extends CustomObjective implements Li
 				}
 			}
 		}
-		for (Quest q : quester.getCurrentQuests().keySet()) {
-			final Map<String, Object> datamap = getDataForPlayer(recipient, this, q);
+		for (final Quest q : quester.getCurrentQuests().keySet()) {
+			final Map<String, Object> datamap = getDataForPlayer(recipient.getUniqueId(), this, q);
 			if (datamap != null) {
 				final String rewardNames = (String)datamap.getOrDefault("DXL Item Name", "ANY");
 				final String[] spl = rewardNames.split(",");
 				for (final String str : spl) {
 					if (str != null) {
 						if (str.equals("ANY") || dungeonRewardNames.contains(str.toLowerCase())) {
-							incrementObjective(recipient, this, 1, q);
+							incrementObjective(recipient.getUniqueId(), this, q, 1);
 							return;
 						}
 					}

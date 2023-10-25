@@ -13,16 +13,16 @@
 package me.pikamug.dungeonsxlquests;
 
 import de.erethon.dungeonsxl.api.event.player.GamePlayerDeathEvent;
-import me.blackvein.quests.CustomObjective;
-import me.blackvein.quests.Quest;
-import me.blackvein.quests.Quester;
+import me.pikamug.quests.module.BukkitCustomObjective;
+import me.pikamug.quests.player.Quester;
+import me.pikamug.quests.quests.Quest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import java.util.Map;
 
-public class DungeonsXLKillPlayersObjective extends CustomObjective implements Listener {
+public class DungeonsXLKillPlayersObjective extends BukkitCustomObjective implements Listener {
 
     public DungeonsXLKillPlayersObjective() {
         setName("DungeonsXL Kill Players Objective");
@@ -46,7 +46,7 @@ public class DungeonsXLKillPlayersObjective extends CustomObjective implements L
         }
         final String dungeonName = e.getGamePlayer().getGameWorld().getDungeon().getName();
         for (final Quest q : quester.getCurrentQuests().keySet()) {
-            final Map<String, Object> datamap = getDataForPlayer(killer, this, q);
+            final Map<String, Object> datamap = getDataForPlayer(killer.getUniqueId(), this, q);
             if (datamap != null) {
                 final String dungeonNames = (String)datamap.getOrDefault("DXL Player Dungeon", "ANY");
                 if (dungeonNames == null) {
@@ -55,7 +55,7 @@ public class DungeonsXLKillPlayersObjective extends CustomObjective implements L
                 final String[] split = dungeonNames.split(",");
                 for (final String str : split) {
                     if (str.equals("ANY") || str.trim().equalsIgnoreCase(dungeonName)) {
-                        incrementObjective(killer, this, 1, q);
+                        incrementObjective(killer.getUniqueId(), this, q, 1);
                         break;
                     }
                 }
