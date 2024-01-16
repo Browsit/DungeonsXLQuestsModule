@@ -15,6 +15,7 @@ package me.pikamug.dungeonsxlquests;
 import de.erethon.dungeonsxl.api.Reward;
 import de.erethon.dungeonsxl.api.event.player.GlobalPlayerRewardPayOutEvent;
 import de.erethon.dungeonsxl.reward.MoneyReward;
+import me.pikamug.quests.enums.ObjectiveType;
 import me.pikamug.quests.module.BukkitCustomObjective;
 import me.pikamug.quests.player.Quester;
 import me.pikamug.quests.quests.Quest;
@@ -51,8 +52,8 @@ public class DungeonsXLMoneyRewardObjective extends BukkitCustomObjective implem
 				dungeonRewardNames.add(ir.getMoney());
 			}
 		}
-		for (final Quest q : quester.getCurrentQuests().keySet()) {
-			final Map<String, Object> datamap = getDataForPlayer(recipient.getUniqueId(), this, q);
+		for (final Quest quest : quester.getCurrentQuests().keySet()) {
+			final Map<String, Object> datamap = getDataForPlayer(recipient.getUniqueId(), this, quest);
 			if (datamap != null) {
 				final String rewardNames = (String)datamap.getOrDefault("DXL Money Amount", "ANY");
 				if (rewardNames == null) {
@@ -62,7 +63,13 @@ public class DungeonsXLMoneyRewardObjective extends BukkitCustomObjective implem
 				for (final String str : spl) {
 					if (str != null) {
 						if (str.equals("ANY") || dungeonRewardNames.contains(Double.valueOf(str))) {
-							incrementObjective(recipient.getUniqueId(), this, q, 1);
+							incrementObjective(recipient.getUniqueId(), this, quest, 1);
+
+							quester.dispatchMultiplayerEverything(quest, ObjectiveType.CUSTOM,
+									(final Quester q, final Quest cq) -> {
+										incrementObjective(q.getUUID(), this, quest, 1);
+										return null;
+									});
 							return;
 						}
 					}

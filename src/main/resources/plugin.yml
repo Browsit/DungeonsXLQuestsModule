@@ -1,8 +1,8 @@
 name: DungeonsXLQuests
-version: 2.0
+version: 2.1
 description: Quests module for DungeonsXL
 author: PikaMug
 website: https://github.com/PikaMug/DungeonsXLQuestsModule
 
-main: me.pikamug.dungeonsxlquests
+main: me.pikamug.dungeonsxlquests.DungeonsXLModule
 depend: [DungeonsXL, Quests]

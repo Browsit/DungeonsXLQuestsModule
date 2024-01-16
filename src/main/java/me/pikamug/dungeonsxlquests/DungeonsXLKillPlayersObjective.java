@@ -13,6 +13,7 @@
 package me.pikamug.dungeonsxlquests;
 
 import de.erethon.dungeonsxl.api.event.player.GamePlayerDeathEvent;
+import me.pikamug.quests.enums.ObjectiveType;
 import me.pikamug.quests.module.BukkitCustomObjective;
 import me.pikamug.quests.player.Quester;
 import me.pikamug.quests.quests.Quest;
@@ -45,8 +46,8 @@ public class DungeonsXLKillPlayersObjective extends BukkitCustomObjective implem
             return;
         }
         final String dungeonName = e.getGamePlayer().getGameWorld().getDungeon().getName();
-        for (final Quest q : quester.getCurrentQuests().keySet()) {
-            final Map<String, Object> datamap = getDataForPlayer(killer.getUniqueId(), this, q);
+        for (final Quest quest : quester.getCurrentQuests().keySet()) {
+            final Map<String, Object> datamap = getDataForPlayer(killer.getUniqueId(), this, quest);
             if (datamap != null) {
                 final String dungeonNames = (String)datamap.getOrDefault("DXL Player Dungeon", "ANY");
                 if (dungeonNames == null) {
@@ -55,7 +56,13 @@ public class DungeonsXLKillPlayersObjective extends BukkitCustomObjective implem
                 final String[] split = dungeonNames.split(",");
                 for (final String str : split) {
                     if (str.equals("ANY") || str.trim().equalsIgnoreCase(dungeonName)) {
-                        incrementObjective(killer.getUniqueId(), this, q, 1);
+                        incrementObjective(killer.getUniqueId(), this, quest, 1);
+
+                        quester.dispatchMultiplayerEverything(quest, ObjectiveType.CUSTOM,
+                                (final Quester q, final Quest cq) -> {
+                                    incrementObjective(q.getUUID(), this, quest, 1);
+                                    return null;
+                                });
                         break;
                     }
                 }

@@ -14,6 +14,7 @@ package me.pikamug.dungeonsxlquests;
 
 import de.erethon.dungeonsxl.api.event.mob.DungeonMobDeathEvent;
 import de.erethon.dungeonsxl.mob.DNPCRegistry;
+import me.pikamug.quests.enums.ObjectiveType;
 import me.pikamug.quests.module.BukkitCustomObjective;
 import me.pikamug.quests.player.Quester;
 import me.pikamug.quests.quests.Quest;
@@ -51,8 +52,8 @@ public class DungeonsXLKillMobsObjective extends BukkitCustomObjective implement
 			return;
 		}
 		final String mobName = entity.getName();
-		for (final Quest q : quester.getCurrentQuests().keySet()) {
-			final Map<String, Object> datamap = getDataForPlayer(killer.getUniqueId(), this, q);
+		for (final Quest quest : quester.getCurrentQuests().keySet()) {
+			final Map<String, Object> datamap = getDataForPlayer(killer.getUniqueId(), this, quest);
 			if (datamap != null) {
 				final String mobNames = (String)datamap.getOrDefault("DXL Mob Name", "ANY");
 				if (mobNames == null) {
@@ -61,7 +62,13 @@ public class DungeonsXLKillMobsObjective extends BukkitCustomObjective implement
 				final String[] spl = mobNames.split(",");
 				for (final String str : spl) {
 					if (str.equals("ANY") || mobName.equalsIgnoreCase(str)) {
-						incrementObjective(killer.getUniqueId(), this, q, 1);
+						incrementObjective(killer.getUniqueId(), this, quest, 1);
+
+						quester.dispatchMultiplayerEverything(quest, ObjectiveType.CUSTOM,
+								(final Quester q, final Quest cq) -> {
+									incrementObjective(q.getUUID(), this, quest, 1);
+									return null;
+								});
 						return;
 					}
 				}

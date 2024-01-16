@@ -13,6 +13,7 @@
 package me.pikamug.dungeonsxlquests;
 
 import de.erethon.dungeonsxl.api.event.player.GamePlayerFinishEvent;
+import me.pikamug.quests.enums.ObjectiveType;
 import me.pikamug.quests.module.BukkitCustomObjective;
 import me.pikamug.quests.player.Quester;
 import me.pikamug.quests.quests.Quest;
@@ -42,8 +43,8 @@ public class DungeonsXLFinishObjective extends BukkitCustomObjective implements 
 			return;
 		}
 		final String dungeonName = event.getGamePlayer().getGroup().getDungeon().getName();
-		for (final Quest q : quester.getCurrentQuests().keySet()) {
-			final Map<String, Object> datamap = getDataForPlayer(finisher.getUniqueId(), this, q);
+		for (final Quest quest : quester.getCurrentQuests().keySet()) {
+			final Map<String, Object> datamap = getDataForPlayer(finisher.getUniqueId(), this, quest);
 			if (datamap != null) {
 				final String dungeonNames = (String)datamap.getOrDefault("DXL Finish Dungeon", "ANY");
 				if (dungeonNames == null) {
@@ -52,7 +53,13 @@ public class DungeonsXLFinishObjective extends BukkitCustomObjective implements 
 				final String[] spl = dungeonNames.split(",");
 				for (final String str : spl) {
 					if (str.equals("ANY") || dungeonName.equalsIgnoreCase(str)) {
-						incrementObjective(finisher.getUniqueId(), this, q, 1);
+						incrementObjective(finisher.getUniqueId(), this, quest, 1);
+
+						quester.dispatchMultiplayerEverything(quest, ObjectiveType.CUSTOM,
+								(final Quester q, final Quest cq) -> {
+									incrementObjective(q.getUUID(), this, quest, 1);
+									return null;
+								});
 						return;
 					}
 				}
